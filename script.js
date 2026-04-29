@@ -1,14 +1,23 @@
-const cards = [...document.querySelectorAll(".work-card")];
-const dots = [...document.querySelectorAll(".mobile-dots button")];
+// MOBILE MENU
+const menuBtn = document.querySelector(".menu-button");
+const mobileMenu = document.querySelector(".mobile-menu");
 
-dots.forEach((dot, index) => {
-  dot.addEventListener("click", () => {
-    cards.forEach((card, cardIndex) => {
-      card.classList.toggle("is-current", cardIndex === index);
-    });
+menuBtn.addEventListener("click", () => {
+  mobileMenu.classList.toggle("active");
+});
 
-    dots.forEach((item, dotIndex) => {
-      item.classList.toggle("is-active", dotIndex === index);
-    });
+// VIDEO MODAL
+const modal = document.querySelector(".video-modal");
+const iframe = modal.querySelector("iframe");
+
+document.querySelectorAll(".thumbnail button").forEach(btn => {
+  btn.addEventListener("click", () => {
+    iframe.src = btn.dataset.video;
+    modal.classList.add("active");
   });
+});
+
+modal.addEventListener("click", () => {
+  modal.classList.remove("active");
+  iframe.src = "";
 });
