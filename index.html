@@ -1,47 +1,112 @@
-document.addEventListener("DOMContentLoaded", () => {
-  // MOBILE MENU
-  const menuBtn = document.querySelector(".menu-button");
-  const mobileMenu = document.querySelector(".mobile-menu");
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  if (menuBtn && mobileMenu) {
-    menuBtn.addEventListener("click", () => {
-      mobileMenu.classList.toggle("active");
-    });
+  <!-- SEO -->
+  <title>SealedWare | AI Media & Software Solutions</title>
+  <meta name="description" content="SealedWare is a Business Technologies company specializing in AI-driven media production, software development, and digital advertising solutions." />
 
-    // close when clicking a link
-    mobileMenu.querySelectorAll("a").forEach(a => {
-      a.addEventListener("click", () => mobileMenu.classList.remove("active"));
-    });
-  }
+  <!-- Open Graph -->
+  <meta property="og:title" content="SealedWare Business Technologies" />
+  <meta property="og:description" content="AI Media Production, Software Development, Digital Advertising." />
+  <meta property="og:image" content="assets/hero-left.png" />
 
-  // MOBILE DOTS (your original)
-  const cards = [...document.querySelectorAll(".work-card")];
-  const dots = [...document.querySelectorAll(".mobile-dots button")];
+  <!-- Favicon -->
+  <link rel="icon" href="favicon.ico" />
 
-  if (cards.length && dots.length) {
-    dots.forEach((dot, index) => {
-      dot.addEventListener("click", () => {
-        cards.forEach((card, i) => card.classList.toggle("is-current", i === index));
-        dots.forEach((d, i) => d.classList.toggle("is-active", i === index));
-      });
-    });
-  }
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 
-  // VIDEO MODAL (SAFE — won’t break if not present)
-  const modal = document.querySelector(".video-modal");
-  const iframe = modal ? modal.querySelector("iframe") : null;
+  <link rel="stylesheet" href="styles.css" />
+</head>
 
-  if (modal && iframe) {
-    document.querySelectorAll(".thumbnail button").forEach(btn => {
-      btn.addEventListener("click", () => {
-        iframe.src = btn.dataset.video || "";
-        modal.classList.add("active");
-      });
-    });
+<body>
 
-    modal.addEventListener("click", () => {
-      modal.classList.remove("active");
-      iframe.src = "";
-    });
-  }
-});
+<!-- MOBILE MENU -->
+<div class="mobile-menu">
+  <a href="#home">Home</a>
+  <a href="#services">Services</a>
+  <a href="#work">Work</a>
+  <a href="#about">About</a>
+  <a href="#contact">Contact</a>
+</div>
+
+<main class="site-shell">
+
+<header class="topbar">
+  <a class="brand" href="#home">
+    <img src="assets/logo-reference.png" alt="SealedWare" />
+  </a>
+
+  <nav class="desktop-nav">
+    <a class="is-active" href="#home">Home</a>
+    <a href="#services">Services</a>
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <a class="button button-small desktop-cta" href="#contact">Get In Touch</a>
+
+  <button class="menu-button">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<section class="hero" id="home">
+  <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="assets/hero-left.png">
+    <source src="assets/sealedware-promo.mp4" type="video/mp4" />
+  </video>
+
+  <div class="hero-content">
+    <h1>SealedWare</h1>
+    <p class="subtitle">Business Technologies</p>
+    <p class="disciplines">Software • Media • AI • Advertising</p>
+    <a class="button watch-button" href="#work">Watch Reel</a>
+  </div>
+</section>
+
+<section class="section services" id="services">
+  <div class="section-title"><h2>What We Do</h2></div>
+
+  <div class="service-grid">
+    <article class="service-card"><h3>Software Solutions</h3></article>
+    <article class="service-card"><h3>AI Media Production</h3></article>
+    <article class="service-card"><h3>Digital Advertising</h3></article>
+    <article class="service-card"><h3>Business Growth</h3></article>
+  </div>
+</section>
+
+<section class="section work" id="work">
+  <div class="section-title"><h2>Featured Work</h2></div>
+
+  <div class="work-grid">
+    <article class="work-card">
+      <div class="thumbnail">
+        <img src="assets/work-1.png" loading="lazy">
+        <button data-video="https://www.youtube.com/embed/dQw4w9WgXcQ"></button>
+      </div>
+      <h3>Project 1</h3>
+    </article>
+  </div>
+</section>
+
+<footer class="footer" id="contact">
+  <p>© 2026 SealedWare</p>
+</footer>
+
+</main>
+
+<!-- VIDEO MODAL -->
+<div class="video-modal">
+  <iframe src="" allowfullscreen></iframe>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
