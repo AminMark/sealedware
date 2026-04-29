@@ -807,3 +807,37 @@ a {
   width: 80%;
   height: 60%;
 }
+/* MOBILE MENU */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: -280px;
+  width: 260px;
+  height: 100vh;
+  z-index: 9999;
+  background: #020202;
+  border-left: 1px solid var(--gold);
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding: 90px 28px 28px;
+  transition: right 0.28s ease;
+}
+
+.mobile-menu.active {
+  right: 0;
+}
+
+.mobile-menu a {
+  color: var(--gold-bright);
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.menu-button {
+  position: relative;
+  z-index: 10000;
+  cursor: pointer;
+}
