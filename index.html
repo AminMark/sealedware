@@ -1,212 +1,112 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SealedWare Business Technologies</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <main class="site-shell">
-      <header class="topbar">
-        <a class="brand" href="#home" aria-label="SealedWare home">
-          <img src="assets/logo-reference.png" alt="SealedWare Business Technologies" />
-        </a>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <nav class="desktop-nav" aria-label="Primary navigation">
-          <a class="is-active" href="#home">Home</a>
-          <a href="#services">Services</a>
-          <a href="#work">Work</a>
-          <a href="#about">About Us</a>
-          <a href="#contact">Contact</a>
-        </nav>
+  <!-- SEO -->
+  <title>SealedWare | AI Media & Software Solutions</title>
+  <meta name="description" content="SealedWare is a Business Technologies company specializing in AI-driven media production, software development, and digital advertising solutions." />
 
-        <a class="button button-small desktop-cta" href="#contact">Get In Touch</a>
-        <button class="menu-button" type="button" aria-label="Open navigation">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      </header>
+  <!-- Open Graph -->
+  <meta property="og:title" content="SealedWare Business Technologies" />
+  <meta property="og:description" content="AI Media Production, Software Development, Digital Advertising." />
+  <meta property="og:image" content="assets/hero-left.png" />
 
-      <section class="hero" id="home" aria-label="SealedWare promo reel">
-        <video class="hero-video" autoplay muted loop playsinline poster="assets/hero-left.png">
-          <source src="assets/sealedware-promo.mp4" type="video/mp4" />
-        </video>
-        <div class="hero-side hero-side-left" aria-hidden="true"></div>
-        <div class="hero-side hero-side-right" aria-hidden="true"></div>
-        <div class="hero-overlay" aria-hidden="true"></div>
+  <!-- Favicon -->
+  <link rel="icon" href="favicon.ico" />
 
-        <div class="hero-content">
-          <h1>SealedWare</h1>
-          <p class="subtitle">Business Technologies</p>
-          <p class="disciplines">Software <span></span> Media <span></span> AI <span></span> Advertising</p>
-          <a class="button watch-button" href="#work" aria-label="Watch reel">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M8 5v14l11-7z" />
-            </svg>
-            Watch Reel
-          </a>
-        </div>
-      </section>
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 
-      <section class="section services" id="services">
-        <div class="section-title">
-          <span></span>
-          <h2>What We Do</h2>
-          <span></span>
-        </div>
+  <link rel="stylesheet" href="styles.css" />
+</head>
 
-        <div class="service-grid">
-          <article class="service-card">
-            <svg viewBox="0 0 48 48" aria-hidden="true">
-              <path d="M19 12 7 24l12 12M29 12l12 12-12 12M27 8 21 40" />
-            </svg>
-            <h3>Software Solutions</h3>
-            <p>Custom software and digital solutions built for scale and efficiency.</p>
-          </article>
-          <article class="service-card">
-            <svg viewBox="0 0 48 48" aria-hidden="true">
-              <path d="M9 18h30v21H9zM9 18l6-9M20 18l6-9M31 18l6-9M9 18h30M14 28h20" />
-            </svg>
-            <h3>AI Media Production</h3>
-            <p>AI-powered media production and cinematic visual storytelling.</p>
-          </article>
-          <article class="service-card">
-            <svg viewBox="0 0 48 48" aria-hidden="true">
-              <path d="M9 27v10l9-4 16 8V7L18 15H9v12zM37 17l5-4M38 25h7M37 33l5 4" />
-            </svg>
-            <h3>Digital Advertising</h3>
-            <p>Strategic advertising that drives brand visibility and growth.</p>
-          </article>
-          <article class="service-card">
-            <svg viewBox="0 0 48 48" aria-hidden="true">
-              <path d="M8 40h32M11 34V23h6v11M21 34V16h6v18M31 34V9h6v25M10 18l10-7 7 6 11-12" />
-            </svg>
-            <h3>Business Growth</h3>
-            <p>Data-driven strategies that transform businesses and create impact.</p>
-          </article>
-        </div>
-      </section>
+<body>
 
-      <section class="section work" id="work">
-        <div class="section-title">
-          <span></span>
-          <h2>Featured Work</h2>
-          <span></span>
-        </div>
+<!-- MOBILE MENU -->
+<div class="mobile-menu">
+  <a href="#home">Home</a>
+  <a href="#services">Services</a>
+  <a href="#work">Work</a>
+  <a href="#about">About</a>
+  <a href="#contact">Contact</a>
+</div>
 
-        <div class="work-grid">
-          <article class="work-card is-current">
-            <div class="thumbnail">
-              <img src="assets/work-1.png" alt="The Pharaoh's Code cinematic trailer" />
-              <button aria-label="Play The Pharaoh's Code">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              </button>
-            </div>
-            <h3>The Pharaoh's Code</h3>
-            <p>Movie Trailer</p>
-          </article>
-          <article class="work-card">
-            <div class="thumbnail">
-              <img src="assets/work-2.png" alt="Shadow Protocol teaser" />
-              <button aria-label="Play Shadow Protocol">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              </button>
-            </div>
-            <h3>Shadow Protocol</h3>
-            <p>Teaser</p>
-          </article>
-          <article class="work-card">
-            <div class="thumbnail">
-              <img src="assets/work-3.png" alt="Echoes of War official trailer" />
-              <button aria-label="Play Echoes of War">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              </button>
-            </div>
-            <h3>Echoes of War</h3>
-            <p>Official Trailer</p>
-          </article>
-          <article class="work-card">
-            <div class="thumbnail">
-              <img src="assets/work-4.png" alt="Beyond the Horizon teaser" />
-              <button aria-label="Play Beyond the Horizon">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              </button>
-            </div>
-            <h3>Beyond the Horizon</h3>
-            <p>Teaser</p>
-          </article>
-          <article class="work-card">
-            <div class="thumbnail">
-              <img src="assets/work-5.png" alt="Rise of Empires official trailer" />
-              <button aria-label="Play Rise of Empires">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              </button>
-            </div>
-            <h3>Rise of Empires</h3>
-            <p>Official Trailer</p>
-          </article>
-        </div>
+<main class="site-shell">
 
-        <div class="mobile-dots" aria-label="Featured work slides">
-          <button class="is-active" type="button" aria-label="Show work 1"></button>
-          <button type="button" aria-label="Show work 2"></button>
-          <button type="button" aria-label="Show work 3"></button>
-          <button type="button" aria-label="Show work 4"></button>
-          <button type="button" aria-label="Show work 5"></button>
-        </div>
-      </section>
+<header class="topbar">
+  <a class="brand" href="#home">
+    <img src="assets/logo-reference.png" alt="SealedWare" />
+  </a>
 
-      <section class="cta" id="about">
-        <h2>Let’s Build Something Powerful</h2>
-        <span></span>
-        <a class="button button-small" href="#contact">Get In Touch</a>
-      </section>
+  <nav class="desktop-nav">
+    <a class="is-active" href="#home">Home</a>
+    <a href="#services">Services</a>
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
 
-      <footer class="footer" id="contact">
-        <a class="brand footer-brand" href="#home" aria-label="SealedWare home">
-          <img src="assets/logo-reference.png" alt="SealedWare Business Technologies" />
-        </a>
+  <a class="button button-small desktop-cta" href="#contact">Get In Touch</a>
 
-        <nav class="footer-nav" aria-label="Footer navigation">
-          <a href="#home">Home</a>
-          <a href="#services">Services</a>
-          <a href="#work">Work</a>
-          <a href="#about">About Us</a>
-          <a href="#contact">Contact</a>
-        </nav>
+  <button class="menu-button">
+    <span></span><span></span><span></span>
+  </button>
+</header>
 
-        <div class="social">
-          <p>Follow Us</p>
-          <div>
-            <a href="#" aria-label="Facebook">f</a>
-            <a href="#" aria-label="Instagram">◎</a>
-            <a href="#" aria-label="LinkedIn">in</a>
-            <a href="#" aria-label="YouTube">▶</a>
-          </div>
-        </div>
+<section class="hero" id="home">
+  <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="assets/hero-left.png">
+    <source src="assets/sealedware-promo.mp4" type="video/mp4" />
+  </video>
 
-        <p class="copyright">© 2026 SealedWare Business Technologies Inc. All Rights Reserved.</p>
-      </footer>
-    </main>
+  <div class="hero-content">
+    <h1>SealedWare</h1>
+    <p class="subtitle">Business Technologies</p>
+    <p class="disciplines">Software • Media • AI • Advertising</p>
+    <a class="button watch-button" href="#work">Watch Reel</a>
+  </div>
+</section>
 
-    <script src="script.js"></script>
-  </body>
+<section class="section services" id="services">
+  <div class="section-title"><h2>What We Do</h2></div>
+
+  <div class="service-grid">
+    <article class="service-card"><h3>Software Solutions</h3></article>
+    <article class="service-card"><h3>AI Media Production</h3></article>
+    <article class="service-card"><h3>Digital Advertising</h3></article>
+    <article class="service-card"><h3>Business Growth</h3></article>
+  </div>
+</section>
+
+<section class="section work" id="work">
+  <div class="section-title"><h2>Featured Work</h2></div>
+
+  <div class="work-grid">
+    <article class="work-card">
+      <div class="thumbnail">
+        <img src="assets/work-1.png" loading="lazy">
+        <button data-video="https://www.youtube.com/embed/dQw4w9WgXcQ"></button>
+      </div>
+      <h3>Project 1</h3>
+    </article>
+  </div>
+</section>
+
+<footer class="footer" id="contact">
+  <p>© 2026 SealedWare</p>
+</footer>
+
+</main>
+
+<!-- VIDEO MODAL -->
+<div class="video-modal">
+  <iframe src="" allowfullscreen></iframe>
+</div>
+
+<script src="script.js"></script>
+
+</body>
 </html>
