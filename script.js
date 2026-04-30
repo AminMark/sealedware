@@ -21,6 +21,62 @@ document.addEventListener("DOMContentLoaded", () => {
     menuCloseBtn?.addEventListener("click", closeMenu);
   }
 
+  const enquiry = document.querySelector(".enquiry");
+  const enquiryForm = document.querySelector(".enquiry-form");
+  const contactLinks = document.querySelectorAll('a[href="#contact"]');
+
+  function openEnquiry() {
+    if (!enquiry) return;
+
+    enquiry.classList.add("is-open");
+    enquiry.setAttribute("aria-hidden", "false");
+
+    requestAnimationFrame(() => {
+      enquiry.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }
+
+  function closeEnquiry() {
+    if (!enquiry) return;
+
+    enquiry.classList.remove("is-open");
+    enquiry.setAttribute("aria-hidden", "true");
+  }
+
+  contactLinks.forEach((link) => {
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      openEnquiry();
+
+      if (mobileMenu && menuBtn) {
+        mobileMenu.classList.remove("active");
+        menuBtn.setAttribute("aria-expanded", "false");
+      }
+    });
+  });
+
+  enquiryForm?.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    if (!enquiryForm.checkValidity()) {
+      enquiryForm.reportValidity();
+      return;
+    }
+
+    const formData = new FormData(enquiryForm);
+    const name = String(formData.get("name") || "").trim();
+    const email = String(formData.get("email") || "").trim();
+    const message = String(formData.get("message") || "").trim();
+    const subject = encodeURIComponent(`Website enquiry from ${name}`);
+    const body = encodeURIComponent(
+      [`Name: ${name}`, `Email: ${email}`, "", "Message:", message || "No message provided."].join("\n")
+    );
+
+    window.location.href = `mailto:contact@sealedware.ca?subject=${subject}&body=${body}`;
+    enquiryForm.reset();
+    closeEnquiry();
+  });
+
   const cards = [...document.querySelectorAll(".work-card")];
   const dots = [...document.querySelectorAll(".mobile-dots button")];
   const workGrid = document.querySelector(".work-grid");
