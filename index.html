@@ -200,6 +200,33 @@
         <a class="button button-small" href="#contact">Get In Touch</a>
       </section>
 
+      <section class="enquiry" id="enquiry" aria-hidden="true">
+        <div class="section-title">
+          <span></span>
+          <h2>Send An Enquiry</h2>
+          <span></span>
+        </div>
+
+        <form class="enquiry-form">
+          <div class="form-row">
+            <label for="enquiry-name">Name</label>
+            <input id="enquiry-name" name="name" type="text" autocomplete="name" required />
+          </div>
+
+          <div class="form-row">
+            <label for="enquiry-email">Email</label>
+            <input id="enquiry-email" name="email" type="email" autocomplete="email" required />
+          </div>
+
+          <div class="form-row form-row-full">
+            <label for="enquiry-message">Question</label>
+            <textarea id="enquiry-message" name="message" rows="5" placeholder="Tell us what you would like to build or ask us a question."></textarea>
+          </div>
+
+          <button class="button enquiry-send" type="submit">Send</button>
+        </form>
+      </section>
+
       <footer class="footer" id="contact">
         <a class="brand footer-brand" href="#home" aria-label="SealedWare home">
           <img src="assets/logo-reference.png" alt="SealedWare Business Technologies" />
