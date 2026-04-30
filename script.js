@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (Math.abs(distance) > 50) {
         if (distance > 0) {
-          showSlide(currentIndex + 1, "left");/ swipe left
+          showSlide(currentIndex + 1, "left"); // swipe left
         } else {
           showSlide(currentIndex - 1, "right");// swipe right
         }
