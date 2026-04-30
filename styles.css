@@ -888,3 +888,26 @@ a {
     letter-spacing: 0.16em !important;
   }
 }
+/* HERO GOLD TEXT GRADIENT */
+.hero h1,
+.hero .subtitle {
+  background: linear-gradient(
+    180deg,
+    #ffe3a0 0%,
+    #e7b86d 42%,
+    #9b642b 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important;
+  -webkit-text-fill-color: transparent;
+  text-shadow:
+    0 1px 0 rgba(255, 230, 170, 0.45),
+    0 3px 0 rgba(70, 35, 8, 0.65),
+    0 0 22px rgba(230, 177, 94, 0.35);
+}
+
+.disciplines {
+  color: #ffffff !important;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+}
