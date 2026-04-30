@@ -656,13 +656,19 @@ a {
     display: block;
   }
 
-  .work-card {
-    display: none;
+  @media (max-width: 820px) {
+  .work-grid {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
   }
 
-  .work-card.is-current {
-    display: block;
+  .work-card {
+    min-width: 100%;
+    flex-shrink: 0;
+    transition: transform 0.35s ease;
   }
+}
 
   .thumbnail {
     aspect-ratio: 2.05;
