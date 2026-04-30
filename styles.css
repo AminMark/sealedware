@@ -271,7 +271,7 @@ a {
 
 .hero .subtitle {
   margin-top: 18px;
-  font-size: clamp(14px, 2.6vw, 22px);
+  font-size: clamp(16px, 2.6vw, 26px);
   line-height: 1;
   letter-spacing: 0.37em;
 }
