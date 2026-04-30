@@ -7,8 +7,10 @@ document.addEventListener("DOMContentLoaded", () => {
       mobileMenu.classList.toggle("active");
     });
 
-    mobileMenu.querySelectorAll("a").forEach((a) => {
-      a.addEventListener("click", () => mobileMenu.classList.remove("active"));
+    mobileMenu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        mobileMenu.classList.remove("active");
+      });
     });
   }
 
@@ -23,38 +25,48 @@ document.addEventListener("DOMContentLoaded", () => {
 
     currentIndex = (index + cards.length) % cards.length;
 
-    cards.forEach((card, i) => {
-      card.classList.toggle("is-current", i === currentIndex);
+    cards.forEach((card, cardIndex) => {
+      card.classList.toggle("is-current", cardIndex === currentIndex);
     });
 
-    dots.forEach((dot, i) => {
-      dot.classList.toggle("is-active", i === currentIndex);
+    dots.forEach((dot, dotIndex) => {
+      dot.classList.toggle("is-active", dotIndex === currentIndex);
     });
   }
 
   dots.forEach((dot, index) => {
-    dot.addEventListener("click", () => showSlide(index));
+    dot.addEventListener("click", () => {
+      showSlide(index);
+    });
   });
 
   if (workGrid && cards.length) {
     let startX = 0;
 
-    workGrid.addEventListener("touchstart", (e) => {
-      startX = e.touches[0].clientX;
-    });
+    workGrid.addEventListener(
+      "touchstart",
+      (event) => {
+        startX = event.touches[0].clientX;
+      },
+      { passive: true }
+    );
 
-    workGrid.addEventListener("touchend", (e) => {
-      const endX = e.changedTouches[0].clientX;
-      const distance = startX - endX;
+    workGrid.addEventListener(
+      "touchend",
+      (event) => {
+        const endX = event.changedTouches[0].clientX;
+        const distance = startX - endX;
 
-      if (Math.abs(distance) > 50) {
-        if (distance > 0) {
-          showSlide(currentIndex + 1);
-        } else {
-          showSlide(currentIndex - 1);
+        if (Math.abs(distance) > 50) {
+          if (distance > 0) {
+            showSlide(currentIndex + 1);
+          } else {
+            showSlide(currentIndex - 1);
+          }
         }
-      }
-    });
+      },
+      { passive: true }
+    );
   }
 
   showSlide(0);
