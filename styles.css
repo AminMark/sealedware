@@ -770,24 +770,6 @@ a {
     padding-inline: 17px;
   }
 }
-/* MOBILE MENU */
-.mobile-menu {
-  position: fixed;
-  top: 0;
-  right: -100%;
-  width: 260px;
-  height: 100%;
-  background: #000;
-  display: flex;
-  flex-direction: column;
-  padding: 60px 20px;
-  transition: 0.3s;
-  z-index: 1000;
-}
-
-.mobile-menu.active {
-  right: 0;
-}
 
 /* VIDEO MODAL */
 .video-modal {
