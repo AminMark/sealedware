@@ -271,7 +271,7 @@ a {
 
 .hero .subtitle {
   margin-top: 18px;
-  font-size: clamp(16px, 2.6vw, 26px);
+  font-size: clamp(22px, 2.6vw, 32px);
   line-height: 1;
   letter-spacing: 0.37em;
 }
@@ -471,6 +471,103 @@ a {
 
 .cta span {
   margin: 18px 0 18px;
+}
+
+.enquiry {
+  display: none;
+  padding: 25px 28px 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255, 204, 69, 0.1), transparent 28rem),
+    linear-gradient(145deg, #030303, #0b0905);
+}
+
+.enquiry.is-open {
+  display: block;
+  animation: enquiryReveal 0.32s ease both;
+}
+
+.enquiry-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  width: min(760px, 100%);
+  margin: 0 auto;
+  padding: 22px;
+  border: 1px solid rgba(217, 154, 34, 0.42);
+  background:
+    linear-gradient(115deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.015)),
+    rgba(0, 0, 0, 0.64);
+  box-shadow: inset 0 0 28px rgba(255, 202, 69, 0.05), 0 18px 42px rgba(0, 0, 0, 0.4);
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-row-full {
+  grid-column: 1 / -1;
+}
+
+.form-row label {
+  color: var(--gold-bright);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.form-row input,
+.form-row textarea {
+  width: 100%;
+  color: var(--text);
+  border: 1px solid rgba(217, 154, 34, 0.38);
+  background: rgba(0, 0, 0, 0.62);
+  font: inherit;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.form-row input {
+  min-height: 44px;
+  padding: 0 13px;
+}
+
+.form-row textarea {
+  min-height: 118px;
+  padding: 12px 13px;
+  resize: vertical;
+}
+
+.form-row input:focus,
+.form-row textarea:focus {
+  border-color: var(--gold-bright);
+  box-shadow: 0 0 0 2px rgba(255, 204, 69, 0.18);
+}
+
+.form-row textarea::placeholder {
+  color: rgba(248, 241, 228, 0.46);
+}
+
+.enquiry-send {
+  grid-column: 1 / -1;
+  justify-self: center;
+  min-width: 142px;
+  cursor: pointer;
+}
+
+@keyframes enquiryReveal {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .footer {
@@ -877,6 +974,24 @@ a {
 
   .cta span {
     margin: 12px 0 13px;
+  }
+
+  .enquiry {
+    padding: 20px 17px 22px;
+  }
+
+  .enquiry-form {
+    grid-template-columns: 1fr;
+    gap: 13px;
+    padding: 16px;
+  }
+
+  .form-row input {
+    min-height: 40px;
+  }
+
+  .form-row textarea {
+    min-height: 104px;
   }
 
   .footer {
