@@ -20,19 +20,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let currentIndex = 0;
 
-  function showSlide(index) {
-    if (!cards.length || !dots.length) return;
+ function showSlide(index, direction = "left") {
+  if (!cards.length || !dots.length) return;
 
-    currentIndex = (index + cards.length) % cards.length;
+  currentIndex = (index + cards.length) % cards.length;
 
-    cards.forEach((card, i) => {
-      card.classList.toggle("is-current", i === currentIndex);
-    });
+  cards.forEach((card, i) => {
+    card.classList.remove("is-current", "slide-left", "slide-right");
 
-    dots.forEach((dot, i) => {
-      dot.classList.toggle("is-active", i === currentIndex);
-    });
-  }
+    if (i === currentIndex) {
+      card.classList.add("is-current");
+      card.classList.add(direction === "right" ? "slide-right" : "slide-left");
+    }
+  });
+
+  dots.forEach((dot, i) => {
+    dot.classList.toggle("is-active", i === currentIndex);
+  });
+}
 
   dots.forEach((dot, index) => {
     dot.addEventListener("click", () => {
@@ -56,9 +61,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (Math.abs(distance) > 50) {
         if (distance > 0) {
-          showSlide(currentIndex + 1); // swipe left
+          showSlide(currentIndex + 1, "left");/ swipe left
         } else {
-          showSlide(currentIndex - 1); // swipe right
+          showSlide(currentIndex - 1, "right");// swipe right
         }
       }
     });
