@@ -801,3 +801,14 @@ a {
     padding-inline: 17px;
   }
 }
+@media (max-width: 820px) {
+  .work-card {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .work-card.is-current {
+    display: block;
+    opacity: 1;
+  }
+}
