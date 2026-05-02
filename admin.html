@@ -53,6 +53,23 @@
         gap: 16px;
       }
 
+      .admin-gate {
+        display: grid;
+        gap: 16px;
+        max-width: 520px;
+        margin: 0 auto;
+        padding: 22px;
+        border: 1px solid rgba(217, 154, 34, 0.36);
+        background:
+          linear-gradient(120deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.012)),
+          rgba(10, 9, 7, 0.86);
+      }
+
+      .admin-gate.is-hidden,
+      .admin-form.is-hidden {
+        display: none;
+      }
+
       .admin-card {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -74,8 +91,7 @@
       }
 
       .admin-card .form-row-full,
-      .admin-actions,
-      .admin-password {
+      .admin-actions {
         grid-column: 1 / -1;
       }
 
@@ -131,12 +147,19 @@
         <h1 class="admin-title">Featured Work Admin</h1>
       </header>
 
-      <form class="admin-form">
-        <div class="form-row admin-password">
+      <form class="admin-gate">
+        <div class="form-row">
           <label for="admin-password">Admin Password</label>
-          <input id="admin-password" name="password" type="password" autocomplete="current-password" required />
+          <input id="admin-password" name="password" type="password" autocomplete="current-password" required autofocus />
         </div>
+        <p class="admin-status admin-login-status" aria-live="polite"></p>
+        <div class="admin-actions">
+          <button class="button button-small" type="submit">Unlock Admin</button>
+          <a class="button button-small" href="index.html">Back Home</a>
+        </div>
+      </form>
 
+      <form class="admin-form is-hidden">
         <div class="admin-items"></div>
 
         <p class="admin-status" aria-live="polite"></p>
@@ -151,7 +174,11 @@
     <script>
       const adminItems = document.querySelector(".admin-items");
       const adminForm = document.querySelector(".admin-form");
+      const adminGate = document.querySelector(".admin-gate");
       const adminStatus = document.querySelector(".admin-status");
+      const adminLoginStatus = document.querySelector(".admin-login-status");
+      const adminPassword = document.querySelector("#admin-password");
+      let unlockedPassword = "";
       const fallbackItems = [
         { title: "The Pharaoh's Code", label: "Movie Trailer", url: "", thumbnail: "assets/work-1.png" },
         { title: "Shadow Protocol", label: "Teaser", url: "", thumbnail: "assets/work-2.png" },
@@ -163,6 +190,11 @@
       function setStatus(message, isError = false) {
         adminStatus.textContent = message;
         adminStatus.classList.toggle("is-error", isError);
+      }
+
+      function setLoginStatus(message, isError = false) {
+        adminLoginStatus.textContent = message;
+        adminLoginStatus.classList.toggle("is-error", isError);
       }
 
       function escapeAttribute(value) {
@@ -212,11 +244,20 @@
         }
       }
 
+      adminGate.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        unlockedPassword = adminPassword.value;
+        adminGate.classList.add("is-hidden");
+        adminForm.classList.remove("is-hidden");
+        setLoginStatus("");
+        await loadItems();
+      });
+
       adminForm.addEventListener("submit", async (event) => {
         event.preventDefault();
 
         const cards = [...document.querySelectorAll(".admin-card")];
-        const password = document.querySelector("#admin-password").value;
         const items = cards.map((card) => ({
           title: card.querySelector('[name="title"]').value,
           label: card.querySelector('[name="label"]').value,
@@ -232,7 +273,7 @@
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({ password, items }),
+            body: JSON.stringify({ password: unlockedPassword, items }),
           });
           const result = await response.json().catch(() => ({}));
 
@@ -246,7 +287,6 @@
         }
       });
 
-      loadItems();
     </script>
   </body>
 </html>
