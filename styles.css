@@ -409,28 +409,54 @@ a {
   position: absolute;
   inset: 0;
   content: "";
-  background: radial-gradient(circle at center, transparent 10%, rgba(0, 0, 0, 0.22) 80%);
+  background:
+    radial-gradient(circle at center, rgba(0, 0, 0, 0.02) 0 18%, rgba(0, 0, 0, 0.46) 86%),
+    linear-gradient(rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.2));
 }
 
 .thumbnail button {
   position: absolute;
   inset: 0;
   z-index: 2;
-  width: 48px;
-  height: 48px;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
   margin: auto;
-  border: 2px solid #fff;
+  padding: 0;
+  border: 3px solid rgba(255, 219, 112, 0.96);
   border-radius: 50%;
-  color: #fff;
-  background: rgba(0, 0, 0, 0.23);
+  color: #ffdf7a;
+  background: rgba(0, 0, 0, 0.64);
+  box-shadow:
+    0 8px 22px rgba(0, 0, 0, 0.58),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.42);
   cursor: pointer;
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+
+.thumbnail button::before {
+  content: none;
+}
+
+.thumbnail button:hover {
+  transform: scale(1.06);
+  border-color: #ffe58b;
+  background: rgba(12, 8, 3, 0.68);
+  box-shadow:
+    0 0 18px rgba(255, 204, 69, 0.22),
+    0 10px 24px rgba(0, 0, 0, 0.62),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.36);
 }
 
 .thumbnail svg {
-  width: 20px;
-  height: 20px;
-  margin-left: 3px;
+  position: relative;
+  z-index: 1;
+  width: 22px;
+  height: 22px;
+  margin-left: 2px;
   fill: currentColor;
+  filter: drop-shadow(0 1px 6px rgba(255, 204, 69, 0.36));
 }
 
 .work-card h3 {
@@ -1039,8 +1065,8 @@ a {
   }
 
   .thumbnail button {
-    width: 54px;
-    height: 54px;
+    width: 48px;
+    height: 48px;
   }
 
   .work-card h3 {
