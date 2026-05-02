@@ -1,4 +1,4 @@
-export default async function handler(request, response) {
+module.exports = async function handler(request, response) {
   if (request.method !== "POST") {
     response.setHeader("Allow", "POST");
     return response.status(405).json({ error: "Method not allowed" });
@@ -18,24 +18,32 @@ export default async function handler(request, response) {
     return response.status(500).json({ error: "Email service is not configured" });
   }
 
-  const emailResponse = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${resendApiKey}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      from: fromEmail,
-      to: toEmail,
-      reply_to: email,
-      subject: `Website enquiry from ${name}`,
-      text: [`Name: ${name}`, `Email: ${email}`, "", "Message:", message || "No message provided."].join("\n"),
-    }),
-  });
+  try {
+    const emailResponse = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${resendApiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: fromEmail,
+        to: toEmail,
+        reply_to: email,
+        subject: `Website enquiry from ${name}`,
+        text: [`Name: ${name}`, `Email: ${email}`, "", "Message:", message || "No message provided."].join("\n"),
+      }),
+    });
 
-  if (!emailResponse.ok) {
-    return response.status(502).json({ error: "Email service rejected the request" });
+    const emailResult = await emailResponse.json().catch(() => ({}));
+
+    if (!emailResponse.ok) {
+      return response.status(502).json({
+        error: emailResult.message || emailResult.error || "Email service rejected the request",
+      });
+    }
+  } catch (error) {
+    return response.status(502).json({ error: "Email service could not be reached" });
   }
 
   return response.status(200).json({ ok: true });
-}
+};
