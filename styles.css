@@ -648,6 +648,16 @@ a {
   color: #ff9b8e;
 }
 
+.privacy-note {
+  grid-column: 1 / -1;
+  max-width: 520px;
+  margin: -4px auto 0;
+  color: rgba(248, 241, 228, 0.58);
+  font-size: 11px;
+  line-height: 1.45;
+  text-align: center;
+}
+
 @keyframes enquiryReveal {
   from {
     opacity: 0;
