@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const enquiry = document.querySelector(".enquiry");
   const enquiryForm = document.querySelector(".enquiry-form");
+  const enquiryStatus = document.querySelector(".enquiry-status");
   const contactLinks = document.querySelectorAll('a[href="#contact"]');
 
   function openEnquiry() {
@@ -55,7 +56,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  enquiryForm?.addEventListener("submit", (event) => {
+  function setEnquiryStatus(message, isError = false) {
+    if (!enquiryStatus) return;
+
+    enquiryStatus.textContent = message;
+    enquiryStatus.classList.toggle("is-error", isError);
+  }
+
+  enquiryForm?.addEventListener("submit", async (event) => {
     event.preventDefault();
 
     if (!enquiryForm.checkValidity()) {
@@ -67,14 +75,32 @@ document.addEventListener("DOMContentLoaded", () => {
     const name = String(formData.get("name") || "").trim();
     const email = String(formData.get("email") || "").trim();
     const message = String(formData.get("message") || "").trim();
-    const subject = encodeURIComponent(`Website enquiry from ${name}`);
-    const body = encodeURIComponent(
-      [`Name: ${name}`, `Email: ${email}`, "", "Message:", message || "No message provided."].join("\n")
-    );
+    const submitButton = enquiryForm.querySelector(".enquiry-send");
 
-    window.location.href = `mailto:contact@sealedware.ca?subject=${subject}&body=${body}`;
-    enquiryForm.reset();
-    closeEnquiry();
+    submitButton.disabled = true;
+    setEnquiryStatus("Sending...");
+
+    try {
+      const response = await fetch("/api/enquiry", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, message }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Unable to send enquiry.");
+      }
+
+      enquiryForm.reset();
+      setEnquiryStatus("");
+      closeEnquiry();
+    } catch (error) {
+      setEnquiryStatus("Could not send. Please try again or email contact@sealedware.ca.", true);
+    } finally {
+      submitButton.disabled = false;
+    }
   });
 
   const cards = [...document.querySelectorAll(".work-card")];

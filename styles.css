@@ -559,6 +559,26 @@ a {
   cursor: pointer;
 }
 
+.enquiry-send:disabled {
+  cursor: wait;
+  opacity: 0.62;
+}
+
+.enquiry-status {
+  grid-column: 1 / -1;
+  min-height: 18px;
+  margin: 0;
+  color: var(--gold-bright);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+
+.enquiry-status.is-error {
+  color: #ff9b8e;
+}
+
 @keyframes enquiryReveal {
   from {
     opacity: 0;
