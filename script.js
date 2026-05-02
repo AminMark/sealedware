@@ -95,8 +95,12 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       enquiryForm.reset();
-      setEnquiryStatus("");
-      closeEnquiry();
+      setEnquiryStatus("Thank you. Your enquiry has been sent.");
+
+      window.setTimeout(() => {
+        setEnquiryStatus("");
+        closeEnquiry();
+      }, 2600);
     } catch (error) {
       setEnquiryStatus(error.message || "Could not send. Please try again or email contact@sealedware.ca.", true);
     } finally {
