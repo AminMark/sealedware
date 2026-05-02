@@ -90,14 +90,15 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       if (!response.ok) {
-        throw new Error("Unable to send enquiry.");
+        const result = await response.json().catch(() => ({}));
+        throw new Error(result.error || "Unable to send enquiry.");
       }
 
       enquiryForm.reset();
       setEnquiryStatus("");
       closeEnquiry();
     } catch (error) {
-      setEnquiryStatus("Could not send. Please try again or email contact@sealedware.ca.", true);
+      setEnquiryStatus(error.message || "Could not send. Please try again or email contact@sealedware.ca.", true);
     } finally {
       submitButton.disabled = false;
     }
