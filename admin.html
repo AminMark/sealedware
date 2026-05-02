@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SealedWare Admin | Featured Work</title>
+    <link rel="icon" href="favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      body {
+        background: #070707;
+      }
+
+      .admin-shell {
+        width: min(980px, calc(100% - 32px));
+        margin: 28px auto;
+        padding: 28px;
+        border: 1px solid rgba(217, 154, 34, 0.42);
+        background:
+          radial-gradient(circle at 50% 0%, rgba(255, 204, 69, 0.12), transparent 28rem),
+          #000;
+      }
+
+      .admin-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        margin-bottom: 24px;
+      }
+
+      .admin-header img {
+        width: 220px;
+      }
+
+      .admin-title {
+        margin: 0;
+        color: var(--gold-bright);
+        font-family: Cinzel, Georgia, serif;
+        font-size: 24px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .admin-form {
+        display: grid;
+        gap: 16px;
+      }
+
+      .admin-card {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 13px;
+        padding: 18px;
+        border: 1px solid rgba(217, 154, 34, 0.3);
+        background:
+          linear-gradient(120deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.012)),
+          rgba(10, 9, 7, 0.86);
+      }
+
+      .admin-card h2 {
+        grid-column: 1 / -1;
+        margin: 0;
+        color: var(--gold-bright);
+        font-size: 14px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .admin-card .form-row-full,
+      .admin-actions,
+      .admin-password {
+        grid-column: 1 / -1;
+      }
+
+      .admin-actions {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+      }
+
+      .admin-status {
+        min-height: 18px;
+        margin: 0;
+        color: var(--gold-bright);
+        font-size: 13px;
+        font-weight: 700;
+        text-align: center;
+      }
+
+      .admin-status.is-error {
+        color: #ff9b8e;
+      }
+
+      @media (max-width: 720px) {
+        .admin-shell {
+          width: min(393px, calc(100% - 24px));
+          margin-block: 20px;
+          padding: 18px;
+          border-radius: 20px;
+        }
+
+        .admin-header {
+          display: grid;
+        }
+
+        .admin-header img {
+          width: 190px;
+        }
+
+        .admin-card {
+          grid-template-columns: 1fr;
+          padding: 14px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="admin-shell">
+      <header class="admin-header">
+        <a class="brand" href="index.html" aria-label="SealedWare home">
+          <img src="assets/logo-reference.png" alt="SealedWare Business Technologies" />
+        </a>
+        <h1 class="admin-title">Featured Work Admin</h1>
+      </header>
+
+      <form class="admin-form">
+        <div class="form-row admin-password">
+          <label for="admin-password">Admin Password</label>
+          <input id="admin-password" name="password" type="password" autocomplete="current-password" required />
+        </div>
+
+        <div class="admin-items"></div>
+
+        <p class="admin-status" aria-live="polite"></p>
+
+        <div class="admin-actions">
+          <button class="button button-small" type="submit">Save</button>
+          <a class="button button-small" href="index.html#work">View Work</a>
+        </div>
+      </form>
+    </main>
+
+    <script>
+      const adminItems = document.querySelector(".admin-items");
+      const adminForm = document.querySelector(".admin-form");
+      const adminStatus = document.querySelector(".admin-status");
+      const fallbackItems = [
+        { title: "The Pharaoh's Code", label: "Movie Trailer", url: "", thumbnail: "assets/work-1.png" },
+        { title: "Shadow Protocol", label: "Teaser", url: "", thumbnail: "assets/work-2.png" },
+        { title: "Echoes of War", label: "Official Trailer", url: "", thumbnail: "assets/work-3.png" },
+        { title: "Beyond the Horizon", label: "Teaser", url: "", thumbnail: "assets/work-4.png" },
+        { title: "Rise of Empires", label: "Official Trailer", url: "", thumbnail: "assets/work-5.png" },
+      ];
+
+      function setStatus(message, isError = false) {
+        adminStatus.textContent = message;
+        adminStatus.classList.toggle("is-error", isError);
+      }
+
+      function escapeAttribute(value) {
+        return String(value || "")
+          .replaceAll("&", "&amp;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;");
+      }
+
+      function renderItems(items) {
+        adminItems.innerHTML = items
+          .map(
+            (item, index) => `
+              <section class="admin-card">
+                <h2>Featured Item ${index + 1}</h2>
+                <div class="form-row">
+                  <label for="title-${index}">Title</label>
+                  <input id="title-${index}" name="title" type="text" value="${escapeAttribute(item.title)}" required />
+                </div>
+                <div class="form-row">
+                  <label for="label-${index}">Label</label>
+                  <input id="label-${index}" name="label" type="text" value="${escapeAttribute(item.label || "YouTube Short")}" required />
+                </div>
+                <div class="form-row form-row-full">
+                  <label for="url-${index}">YouTube Shorts Link</label>
+                  <input id="url-${index}" name="url" type="url" value="${escapeAttribute(item.url)}" placeholder="https://youtube.com/shorts/..." />
+                </div>
+                <div class="form-row form-row-full">
+                  <label for="thumbnail-${index}">Thumbnail URL</label>
+                  <input id="thumbnail-${index}" name="thumbnail" type="text" value="${escapeAttribute(item.thumbnail)}" placeholder="Leave blank to use YouTube thumbnail" />
+                </div>
+              </section>
+            `
+          )
+          .join("");
+      }
+
+      async function loadItems() {
+        try {
+          const response = await fetch("/api/work-links");
+          const data = await response.json();
+          renderItems(data.items || []);
+        } catch (error) {
+          renderItems(fallbackItems);
+          setStatus("Defaults loaded. Save works after this page is deployed on Vercel.", true);
+        }
+      }
+
+      adminForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const cards = [...document.querySelectorAll(".admin-card")];
+        const password = document.querySelector("#admin-password").value;
+        const items = cards.map((card) => ({
+          title: card.querySelector('[name="title"]').value,
+          label: card.querySelector('[name="label"]').value,
+          url: card.querySelector('[name="url"]').value,
+          thumbnail: card.querySelector('[name="thumbnail"]').value,
+        }));
+
+        setStatus("Saving...");
+
+        try {
+          const response = await fetch("/api/work-links", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ password, items }),
+          });
+          const result = await response.json().catch(() => ({}));
+
+          if (!response.ok) {
+            throw new Error(result.error || "Could not save Featured Work.");
+          }
+
+          setStatus("Saved. The landing page will use these links now.");
+        } catch (error) {
+          setStatus(error.message || "Could not save Featured Work.", true);
+        }
+      });
+
+      loadItems();
+    </script>
+  </body>
+</html>

@@ -111,7 +111,87 @@ document.addEventListener("DOMContentLoaded", () => {
   const cards = [...document.querySelectorAll(".work-card")];
   const dots = [...document.querySelectorAll(".mobile-dots button")];
   const workGrid = document.querySelector(".work-grid");
+  const fallbackWork = cards.map((card) => ({
+    title: card.querySelector("h3")?.textContent || "Featured Work",
+    label: card.querySelector("p")?.textContent || "Video",
+    thumbnail: card.querySelector("img")?.getAttribute("src") || "",
+    url: "",
+  }));
   let currentIndex = 0;
+  let featuredWork = [...fallbackWork];
+
+  function getYouTubeId(url) {
+    if (!url) return "";
+
+    try {
+      const parsedUrl = new URL(url);
+
+      if (parsedUrl.hostname.includes("youtu.be")) {
+        return parsedUrl.pathname.split("/").filter(Boolean)[0] || "";
+      }
+
+      if (parsedUrl.pathname.includes("/shorts/")) {
+        return parsedUrl.pathname.split("/shorts/")[1]?.split("/")[0] || "";
+      }
+
+      if (parsedUrl.pathname.includes("/embed/")) {
+        return parsedUrl.pathname.split("/embed/")[1]?.split("/")[0] || "";
+      }
+
+      return parsedUrl.searchParams.get("v") || "";
+    } catch (error) {
+      return "";
+    }
+  }
+
+  function getYouTubeThumbnail(url, fallback) {
+    const videoId = getYouTubeId(url);
+    return videoId ? `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg` : fallback;
+  }
+
+  function getYouTubeEmbed(url) {
+    const videoId = getYouTubeId(url);
+    return videoId ? `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0` : "";
+  }
+
+  function applyFeaturedWork(items) {
+    featuredWork = cards.map((card, index) => ({
+      ...fallbackWork[index],
+      ...(items[index] || {}),
+    }));
+
+    cards.forEach((card, index) => {
+      const item = featuredWork[index];
+      const image = card.querySelector("img");
+      const title = card.querySelector("h3");
+      const label = card.querySelector("p");
+      const button = card.querySelector(".play-button");
+      const thumbnail = item.thumbnail || getYouTubeThumbnail(item.url, fallbackWork[index].thumbnail);
+
+      if (image) {
+        image.src = thumbnail;
+        image.alt = `${item.title} featured video`;
+      }
+
+      if (title) title.textContent = item.title;
+      if (label) label.textContent = item.label;
+      if (button) button.setAttribute("aria-label", `Play ${item.title}`);
+    });
+  }
+
+  async function loadFeaturedWork() {
+    try {
+      const response = await fetch("/api/work-links");
+      if (!response.ok) return;
+
+      const data = await response.json();
+      if (Array.isArray(data.items)) {
+        applyFeaturedWork(data.items);
+      }
+    } catch (error) {
+      applyFeaturedWork(fallbackWork);
+    }
+  }
 
   function showSlide(index) {
     if (!cards.length || !dots.length) return;
@@ -165,9 +245,11 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   showSlide(0);
+  loadFeaturedWork();
 
   const modal = document.querySelector(".video-modal");
   const modalVideo = document.querySelector(".modal-video");
+  const modalFrame = document.querySelector(".modal-video-frame");
   const closeButton = document.querySelector(".video-close");
   const playButtons = document.querySelectorAll(".play-button");
 
@@ -180,16 +262,35 @@ document.addEventListener("DOMContentLoaded", () => {
     if (modalVideo) {
       modalVideo.pause();
       modalVideo.currentTime = 0;
+      modalVideo.style.display = "block";
+    }
+
+    if (modalFrame) {
+      modalFrame.src = "";
+      modalFrame.style.display = "none";
     }
   }
 
-  playButtons.forEach((button) => {
+  playButtons.forEach((button, index) => {
     button.addEventListener("click", () => {
       if (!modal) return;
 
+      const embedUrl = getYouTubeEmbed(featuredWork[index]?.url);
+
+      if (embedUrl && modalFrame && modalVideo) {
+        modalVideo.pause();
+        modalVideo.style.display = "none";
+        modalFrame.src = embedUrl;
+        modalFrame.style.display = "block";
+      } else if (modalVideo && modalFrame) {
+        modalFrame.src = "";
+        modalFrame.style.display = "none";
+        modalVideo.style.display = "block";
+        modalVideo.play().catch(() => {});
+      }
+
       modal.classList.add("active");
       modal.setAttribute("aria-hidden", "false");
-      modalVideo?.play().catch(() => {});
     });
   });
 

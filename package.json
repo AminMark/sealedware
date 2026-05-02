@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "build": "echo \"Static site ready\""
+  },
+  "dependencies": {
+    "redis": "^5.10.0"
+  }
+}
